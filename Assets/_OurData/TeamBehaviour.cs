@@ -1,18 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TeamBehaviour : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    protected virtual void Awake()
     {
-        
+        this.LoadComponents();
+        this.ResetValue();
+    }
+    private void Reset()
+    {
+        this.LoadComponents();
+        this.ResetValue();
     }
 
-    // Update is called once per frame
-    void Update()
+    [ContextMenu("Load Components Only")]
+    protected void LoadComponentsContextMenu()
     {
-        
+        this.LoadComponents();
     }
+
+    protected virtual void LoadComponents()
+    {
+        //todo load component
+    }
+
+    protected virtual void ResetValue()
+    {
+        // todo reset value
+    }
+
 }
