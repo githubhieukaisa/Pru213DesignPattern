@@ -1,0 +1,20 @@
+# Bỏ qua tất cả mọi thứ
+*
+
+# ✅ Giữ thư mục .gitignore
+!.gitignore
+
+# ✅ Giữ lại thư mục Assets và hai thư mục con cần thiết
+!Assets/
+!Assets/_OurData/
+!Assets/_OurData/**
+!Assets/_Scenes/
+!Assets/_Scenes/**
+!Assets/_Shop/
+!Assets/_Shop/**
+!Assets/_OurPrefab/
+!Assets/_OurPrefab/**
+
+# Giữ lại các file words
+!"cốt truyện.docx"
+!"plan.docx"
