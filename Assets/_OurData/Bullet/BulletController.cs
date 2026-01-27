@@ -60,7 +60,7 @@ public class BulletController : TeamBehaviour
     {
         if (((1 << other.gameObject.layer) & hitLayer) != 0)
         {
-            Debug.Log($"Bullet hit: {other.name}");
+            // Debug.Log($"Bullet hit: {other.name}");
 
             ReturnToPool();
         }

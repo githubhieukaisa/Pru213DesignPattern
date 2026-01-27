@@ -431,7 +431,6 @@ MonoBehaviour:
   armTransform: {fileID: 260467264}
   minAngle: -80
   maxAngle: 80
-  rotationOffset: 0
   _rb: {fileID: 567248556}
   groundCheck: {fileID: 1298445220}
   _animator: {fileID: 1539342774}
@@ -511,8 +510,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 725840360}
   bulletPrefab: {fileID: 8998384871418480281, guid: a5c3f82872495464e9e36bed71d3e77b, type: 3}
-  fireRate: 0.1
-  bulletsPerShot: 5
+  fireRate: 0.05
+  bulletsPerShot: 20
   accuracySpread: 5
   usePooling: 1
   maxAmmo: 30
@@ -521,7 +520,6 @@ MonoBehaviour:
   currentAmmo: 0
   isReloading: 0
   lastFireTime: 0
-  rotationOffset: 0
 --- !u!1 &725840359
 GameObject:
   m_ObjectHideFlags: 0
