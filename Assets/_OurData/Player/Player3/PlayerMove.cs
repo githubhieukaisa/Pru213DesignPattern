@@ -12,8 +12,8 @@ public class PlayerMove : TeamBehaviour
     [SerializeField] private Transform armTransform;
 
     [Header("Rotation Limits")]
-    [SerializeField] private float minAngle = -80f;
-    [SerializeField] private float maxAngle = 80f;
+    [SerializeField] private float minAngle = -50f;
+    [SerializeField] private float maxAngle = 40f;
     // ĐÃ XÓA: rotationOffset
 
     [Header("Physics Components")]
@@ -25,7 +25,7 @@ public class PlayerMove : TeamBehaviour
     private float _horizontalInput;
 
     public readonly int IsRunningHash = Animator.StringToHash("isRunning");
-    public readonly int IsJumpingHash = Animator.StringToHash("isJumping");
+    // public readonly int IsJumpingHash = Animator.StringToHash("isJumping");
     public readonly int InputXHash = Animator.StringToHash("InputX");
 
     protected override void LoadComponents()
@@ -62,6 +62,7 @@ public class PlayerMove : TeamBehaviour
         }
 
         UpdateAnimation();
+        this.Turning();
     }
 
     private void FixedUpdate()
@@ -92,17 +93,31 @@ public class PlayerMove : TeamBehaviour
             animSpeed = -1f;
         }
 
-        // Gửi giá trị vào Animator để điều khiển Multiplier
-        _animator.SetFloat(InputXHash, animSpeed);
+        _animator.SetFloat(InputXHash, animSpeed * body.localScale.x);
     }
 
     private void RotateArmToMouse()
     {
-        Vector3 mousePos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0f;
         Vector3 direction = mousePos - armTransform.position;
+
+        if (body.localScale.x < 0)
+        {
+            direction.x = -direction.x;
+        }
+
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         angle = Mathf.Clamp(angle, minAngle, maxAngle);
         armTransform.localRotation = Quaternion.Euler(0, 0, angle);
+    }
+
+    protected virtual void Turning()
+    {
+        Vector3 mouse = Input.mousePosition;
+        Vector3 vec3 = new Vector3(mouse.x, mouse.y, this.body.transform.position.y);
+        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(vec3);
+        Vector3 mouseToChar = mouseWorld - this.body.transform.position;
+        body.transform.localScale = new Vector3(Mathf.Sign(mouseToChar.x), 1, 1);
     }
 }

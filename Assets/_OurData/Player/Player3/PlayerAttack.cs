@@ -6,6 +6,7 @@ public class PlayerAttack : TeamBehaviour
     [Header("References")]
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Transform body;
 
     [Header("Weapon Stats")]
     [SerializeField] private float fireRate = 0.1f;
@@ -22,7 +23,6 @@ public class PlayerAttack : TeamBehaviour
     [SerializeField] private int currentAmmo;
     [SerializeField] private bool isReloading = false;
     [SerializeField] private float lastFireTime;
-    // ĐÃ XÓA: rotationOffset
 
     protected override void LoadComponents()
     {
@@ -32,6 +32,9 @@ public class PlayerAttack : TeamBehaviour
 
         if (firePoint == null)
             firePoint = transform;
+
+        if (body == null)
+            body = transform.Find("Body");
     }
 
     private void Start()
@@ -83,12 +86,11 @@ public class PlayerAttack : TeamBehaviour
 
             // QUAN TRỌNG: Chỉ dùng rotation của FirePoint nhân với độ tản mát
             // FirePoint.rotation bây giờ phải được chỉnh chuẩn trong Editor
-            Quaternion finalRotation = firePoint.rotation * spreadRotation;
+            Quaternion finalRotation = firePoint.rotation * spreadRotation * Quaternion.Euler(0, body.localScale.x < 0 ? 180 : 0, 0);
 
             if (!usePooling)
             {
                 GameObject bullet = Instantiate(bulletPrefab, firePoint.position, finalRotation);
-                // Giả sử BulletController có hàm này
                 BulletController bulletController = bullet.GetComponent<BulletController>();
                 if (bulletController != null) bulletController.SetUsePooling(false);
             }
