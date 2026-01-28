@@ -8,7 +8,7 @@ public class BulletController : TeamBehaviour
     [Header("Bullet Settings")]
     [SerializeField] private float speed = 20f;
     [SerializeField] private float lifeTime = 2f;
-    [SerializeField] private int damage = 1;
+    // [SerializeField] private int damage = 1;
 
     [Header("Impact Effects")]
     [SerializeField] private LayerMask hitLayer;

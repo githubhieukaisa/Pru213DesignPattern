@@ -81,11 +81,8 @@ public class PlayerAttack : TeamBehaviour
         {
             float randomSpread = Random.Range(-accuracySpread, accuracySpread);
 
-            // Tạo độ tản mát
             Quaternion spreadRotation = Quaternion.Euler(0, 0, randomSpread);
 
-            // QUAN TRỌNG: Chỉ dùng rotation của FirePoint nhân với độ tản mát
-            // FirePoint.rotation bây giờ phải được chỉnh chuẩn trong Editor
             Quaternion finalRotation = firePoint.rotation * spreadRotation * Quaternion.Euler(0, body.localScale.x < 0 ? 180 : 0, 0);
 
             if (!usePooling)
@@ -107,11 +104,9 @@ public class PlayerAttack : TeamBehaviour
         if (currentAmmo == maxAmmo) yield break;
 
         isReloading = true;
-        // Debug.Log("Reloading...");
         yield return new WaitForSeconds(reloadTime);
         currentAmmo = maxAmmo;
         isReloading = false;
-        // Debug.Log("Reload Complete!");
     }
 
     public void UpgradeShotCount(int amount)
