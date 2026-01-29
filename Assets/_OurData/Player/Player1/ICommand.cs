@@ -1,28 +1,41 @@
 
 public interface ICommand
 {
-    void Execute(Player1Move player);
+    void Execute();
 }
 
 public class JumpCommand : ICommand
 {
-    public void Execute(Player1Move player)
+    private Player1Move _player;
+
+    public JumpCommand(Player1Move player)
     {
-        player.PerformJump();
+        _player = player;
+    }
+
+    public void Execute()
+    {
+        _player.PerformJump();
     }
 }
 
 public class MoveCommand : ICommand
 {
+    private Player1Move _player;
     private float _direction;
 
-    public MoveCommand(float direction)
+    public MoveCommand(Player1Move player)
+    {
+        _player = player;
+    }
+
+    public void UpdateDirection(float direction)
     {
         _direction = direction;
     }
 
-    public void Execute(Player1Move player)
+    public void Execute()
     {
-        player.PerformMove(_direction);
+        _player.PerformMove(_direction);
     }
 }

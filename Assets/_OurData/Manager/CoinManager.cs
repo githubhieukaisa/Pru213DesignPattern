@@ -5,7 +5,7 @@ public class CoinManager : TeamBehaviour
 {
     public static CoinManager Instance { get; private set; }
     [Header("References")]
-    [SerializeField] private TextMeshProUGUI coinText;
+    [SerializeField] public TextMeshProUGUI coinText;
     private int coinCount = 0;
     protected override void Awake()
     {
@@ -25,7 +25,7 @@ public class CoinManager : TeamBehaviour
         base.LoadComponents();
         if (coinText == null)
         {
-            coinText = GameObject.Find("CoinText")?.GetComponent<TextMeshProUGUI>();
+            coinText = GameObject.Find("Canvas/CoinText")?.GetComponent<TextMeshProUGUI>();
         }
     }
 

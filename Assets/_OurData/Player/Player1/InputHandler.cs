@@ -4,17 +4,24 @@ public class InputHandler : MonoBehaviour
 {
     [SerializeField] private Player1Move playerMove;
 
-    private ICommand _jumpCommand = new JumpCommand();
+    private JumpCommand _jumpCommand;
+    private MoveCommand _moveCommand;
+
+    private void Awake()
+    {
+        _jumpCommand = new JumpCommand(playerMove);
+        _moveCommand = new MoveCommand(playerMove);
+    }
 
     private void Update()
     {
         float inputX = Input.GetAxisRaw("Horizontal");
-        ICommand moveCommand = new MoveCommand(inputX);
-        moveCommand.Execute(playerMove);
+        _moveCommand.UpdateDirection(inputX);
+        _moveCommand.Execute();
 
         if (Input.GetButtonDown("Jump"))
         {
-            _jumpCommand.Execute(playerMove);
+            _jumpCommand.Execute();
         }
     }
 }
