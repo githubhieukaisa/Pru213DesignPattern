@@ -6,11 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Scenes/Singleton.unity
+    path: Assets/_Scenes/SingletonAndCommand.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/_Scenes/Command.unity
-    guid: e0b45cfb08fcbe1489dc023021a22ca5
   - enabled: 1
     path: Assets/_Scenes/ObjectPool.unity
     guid: 1871fdbb5339af848a145a7d9fb190f9
