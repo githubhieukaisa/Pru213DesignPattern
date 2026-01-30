@@ -172,7 +172,7 @@ MonoBehaviour:
   jumpForce: 10
   rb: {fileID: 4608395900832971452}
   model: {fileID: 164640262993203847}
-  anim: {fileID: 0}
+  anim: {fileID: 8245895829765426994}
 --- !u!50 &4608395900832971452
 Rigidbody2D:
   serializedVersion: 4

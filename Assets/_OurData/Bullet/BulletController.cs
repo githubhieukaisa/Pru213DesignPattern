@@ -16,7 +16,6 @@ public class BulletController : TeamBehaviour
     [Header("References")]
     [SerializeField] private TrailRenderer trailRenderer;
     [SerializeField] private Rigidbody2D rb;
-    private Coroutine _deactivateCoroutine;
     private float _timer;
     private bool usePooling = true;
     public void SetUsePooling(bool value)

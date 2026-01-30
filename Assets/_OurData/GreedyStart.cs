@@ -1,4 +1,3 @@
-using Assets.HeroEditor.Common.CommonScripts;
 using UnityEngine;
 
 public class GreedyStart : TeamBehaviour
