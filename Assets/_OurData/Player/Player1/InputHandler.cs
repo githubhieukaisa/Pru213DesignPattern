@@ -1,27 +1,59 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class InputHandler : MonoBehaviour
 {
     [SerializeField] private Player1Move playerMove;
 
-    private JumpCommand _jumpCommand;
-    private MoveCommand _moveCommand;
-
-    private void Awake()
+    [SerializeField] private Stack<ICommand> _commandHistory = new Stack<ICommand>();
+    private enum PlayerAction
     {
-        _jumpCommand = new JumpCommand(playerMove);
-        _moveCommand = new MoveCommand(playerMove);
+        Move,
+        Jump
     }
+    private PlayerAction playerAction;
+    [SerializeField] private float timerPush = 2f;
+    private float timer;
 
     private void Update()
     {
         float inputX = Input.GetAxisRaw("Horizontal");
-        _moveCommand.UpdateDirection(inputX);
-        _moveCommand.Execute();
+
+        if (Mathf.Abs(inputX) > 0.1f)
+        {
+            ICommand moveCommand = new MoveCommand(playerMove, inputX);
+            moveCommand.Execute();
+            if (Time.time - timer > timerPush)
+            {
+                _commandHistory.Push(moveCommand);
+                Debug.Log("Move command executed and pushed to history.");
+                timer = Time.time;
+            }
+        }
+        else if (playerAction == PlayerAction.Move)
+        {
+            ICommand moveCommand = new MoveCommand(playerMove, inputX);
+            moveCommand.Execute();
+        }
 
         if (Input.GetButtonDown("Jump"))
         {
-            _jumpCommand.Execute();
+            ICommand jumpCommand = new JumpCommand(playerMove);
+            jumpCommand.Execute();
+
+            if (playerAction != PlayerAction.Jump)
+            {
+                _commandHistory.Push(jumpCommand);
+                Debug.Log("Jump command executed and pushed to history.");
+                playerAction = PlayerAction.Jump;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z) && _commandHistory.Count > 0)
+        {
+            ICommand lastCommand = _commandHistory.Pop();
+            lastCommand.Undo();
         }
     }
 }

@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMove: {fileID: 4992975061927944040}
+  timerPush: 2
 --- !u!114 &4992975061927944040
 MonoBehaviour:
   m_ObjectHideFlags: 0

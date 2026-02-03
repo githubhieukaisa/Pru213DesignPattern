@@ -11,8 +11,6 @@ public class BulletPoolManager : TeamBehaviour
 
     private Queue<GameObject> _availableBullets = new Queue<GameObject>();
 
-    private List<GameObject> _allBullets = new List<GameObject>();
-
     protected override void Awake()
     {
         base.Awake();

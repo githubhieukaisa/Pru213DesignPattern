@@ -36,13 +36,15 @@ public class BulletController : TeamBehaviour
 
     private void OnEnable()
     {
-        _timer = 0;
-        if (trailRenderer) trailRenderer.Clear();
+        // _timer = 0;
+        // if (trailRenderer) trailRenderer.Clear();
         if (rb) rb.velocity = transform.right * speed;
     }
 
     private void OnDisable()
     {
+        _timer = 0;
+        if (trailRenderer) trailRenderer.Clear();
         rb.velocity = Vector2.zero;
     }
 

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Player1Move : TeamBehaviour
@@ -29,15 +30,21 @@ public class Player1Move : TeamBehaviour
             anim = model.GetComponent<Animator>();
     }
 
-    // private void Update()
-    // {
-    //     horizontalInput = Input.GetAxis("Horizontal");
+    private void Update()
+    {
+        // horizontalInput = Input.GetAxis("Horizontal");
 
-    //     if (Input.GetButtonDown("Jump") && isGrounded)
-    //     {
-    //         Jump();
-    //     }
-    // }
+        // if (Input.GetButtonDown("Jump") && isGrounded)
+        // {
+        //     Jump();
+        // }
+        float inputX = Input.GetAxisRaw("Horizontal");
+        if (Mathf.Abs(inputX) < 0.1f)
+        {
+            anim.SetBool(IsRunHash, false);
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        }
+    }
 
     private void FixedUpdate()
     {
@@ -99,5 +106,10 @@ public class Player1Move : TeamBehaviour
             localScale.x = -Mathf.Abs(localScale.x);
         }
         model.localScale = localScale;
+    }
+
+    public void Teleport(Vector3 position)
+    {
+        transform.position = position;
     }
 }
